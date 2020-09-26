@@ -1,14 +1,14 @@
 import BaseLayout from '@/components/layouts/baseLayout'
 import BasePage from '@/components/basePage'
 
-const Blog = () => {
+const Resume = () => {
     return(
         <BaseLayout>
             <BasePage>
-                <h1> This is blogs page </h1>    
+                <h1> This is resume page </h1>    
             </BasePage> 
         </BaseLayout>
     )
 }
 
-export default Blog;
+export default Resume;
