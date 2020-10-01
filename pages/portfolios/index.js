@@ -1,11 +1,15 @@
 import BaseLayout from '@/components/layouts/baseLayout'
 import BasePage from '@/components/basePage'
 import Link from 'next/link'
-import axios from 'axios'
+import {useGetPosts} from '@/actions'
 
-const Portfolio = ({posts}) => {
+const Portfolio = () => {
+    
+    const {data, error, loading} = useGetPosts()
+
     const renderPosts = (posts) => {
-        return posts.map(post => <li key = {post.id} style = {{'fontSize': '20px'}}>
+        return posts.map(post => 
+            <li key = {post.id} style = {{'fontSize': '20px'}}>
             <Link as = {`/portfolios/${post.id}`} href = {`/portfolios/[id]`}>
                 <a>
                     {post.title}
@@ -15,30 +19,27 @@ const Portfolio = ({posts}) => {
     }
 
     return(
-        <BaseLayout>
+        <BaseLayout> 
             <BasePage>
                 <h1> This is Portfolio page </h1>
-                <ul>
-                    {renderPosts(posts)}
-                </ul>
+                {
+                    loading &&
+                    <p>Loading...</p>
+                }
+                {
+                    data &&
+                    <ul>
+                        {renderPosts(data)}
+                    </ul>
+                }
+                {
+                    error &&
+                    <div className = "alert alert-danger">{error.message}</div>
+                }
+                
             </BasePage>
         </BaseLayout>
     )
-}
-
-Portfolio.getInitialProps = async () => {
-    let posts = []
-
-    try{
-        const res  = await axios.get('https://jsonplaceholder.typicode.com/posts')
-        posts = res.data
-    } 
-    
-    catch(e){
-        console.error(e)
-    }
-
-    return {posts: posts.slice(0, 10)}
 }
 
 export default Portfolio;

@@ -18,6 +18,12 @@ const BsNavLink = props => {
     )
   }
 
+const Login = () =>
+  <span className = "nav-link port-navbar-link clickable">Login</span>
+
+const Logout = () =>
+  <span className = "nav-link port-navbar-link clickable">Logout</span>
+
 const BootstrapNavBrand = () => 
   <Link href = "/">
     <a className = "navbar-brand port-navbar-brand">Monit Patel</a>
@@ -53,6 +59,16 @@ const Header = () => {
                 </NavItem>
                 <NavItem className="port-navbar-item">
                   <BsNavLink href="/resume" title="Resume"/>
+                </NavItem>
+              </Nav>
+
+              <Nav navbar>
+                <NavItem className = "port-navbar-item">
+                  <Login />
+                </NavItem>
+
+                <NavItem className = "port-navbar-item">
+                  <Logout />
                 </NavItem>
               </Nav>
             </Collapse>
